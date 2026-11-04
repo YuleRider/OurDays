@@ -1,0 +1,7 @@
+/config/app.php
+/var/
+/backups/
+*.log
+*.bak
+.DS_Store
+Thumbs.db

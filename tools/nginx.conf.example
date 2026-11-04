@@ -1,0 +1,17 @@
+# Set your own domain and project path. Configure HTTPS with your server panel.
+server {
+    listen 80;
+    server_name example.com;
+    root /srv/OurDays/public;
+    index index.php;
+    client_max_body_size 12m;
+    location ~ /\. { deny all; }
+    location ~* \.(?:sql|log|bak|ini|cnf|zip|tar|gz)$ { deny all; }
+    location / { try_files $uri $uri/ =404; }
+    location ~ \.php$ {
+        try_files $uri =404;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_pass unix:/run/php/php-fpm.sock;
+    }
+}
